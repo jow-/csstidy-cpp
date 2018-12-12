@@ -233,6 +233,9 @@ void prepare()
 	all_properties["background-repeat"] = "CSS1.0,CSS2.0,CSS2.1,CSS3.0";
 	all_properties["background-attachment"] = "CSS1.0,CSS2.0,CSS2.1,CSS3.0";
 	all_properties["background-position"] = "CSS1.0,CSS2.0,CSS2.1,CSS3.0";
+	all_properties["background-clip"] = "CSS3.0";
+	all_properties["background-origin"] = "CSS3.0";
+	all_properties["background-size"] = "CSS3.0";
 	all_properties["border"] = "CSS1.0,CSS2.0,CSS2.1,CSS3.0,CSS3.0";
 	all_properties["border-top"] = "CSS1.0,CSS2.0,CSS2.1,CSS3.0";
 	all_properties["border-right"] = "CSS1.0,CSS2.0,CSS2.1,CSS3.0";
