@@ -221,6 +221,8 @@ void prepare()
 	shorthands["margin"].push_back("margin-right");
 	shorthands["margin"].push_back("margin-bottom");
 	shorthands["margin"].push_back("margin-left");
+	shorthands["overflow"].push_back("overflow-x");
+	shorthands["overflow"].push_back("overflow-y");
 	shorthands["padding"].push_back("padding-top");
 	shorthands["padding"].push_back("padding-right");
 	shorthands["padding"].push_back("padding-bottom");
@@ -312,6 +314,10 @@ void prepare()
 	all_properties["outline-width"] = "CSS2.0,CSS2.1,CSS3.0";
 	all_properties["outline-style"] = "CSS2.0,CSS2.1,CSS3.0";
 	all_properties["outline-color"] = "CSS2.0,CSS2.1,CSS3.0";
+	all_properties["overflow"] = "CSS3.0";
+	all_properties["overflow-x"] = "CSS3.0";
+	all_properties["overflow-y"] = "CSS3.0";
+	all_properties["overflow-wrap"] = "CSS3.0";
 	all_properties["padding"] = "CSS1.0,CSS2.0,CSS2.1,CSS3.0";
 	all_properties["padding-top"] = "CSS1.0,CSS2.0,CSS2.1,CSS3.0";
 	all_properties["padding-right"] = "CSS1.0,CSS2.0,CSS2.1,CSS3.0";
@@ -331,17 +337,19 @@ void prepare()
 	all_properties["text-indent"] = "CSS1.0,CSS2.0,CSS2.1,CSS3.0";
 	all_properties["text-align"] = "CSS1.0,CSS2.0,CSS2.1,CSS3.0";
 	all_properties["text-decoration"] = "CSS1.0,CSS2.0,CSS2.1,CSS3.0";
+	all_properties["text-overflow"] = "CSS3.0";
 	all_properties["text-shadow"] = "CSS2.0";
 	all_properties["letter-spacing"] = "CSS1.0,CSS2.0,CSS2.1,CSS3.0";
 	all_properties["word-spacing"] = "CSS1.0,CSS2.0,CSS2.1,CSS3.0";
 	all_properties["text-transform"] = "CSS1.0,CSS2.0,CSS2.1,CSS3.0";
 	all_properties["white-space"] = "CSS1.0,CSS2.0,CSS2.1,CSS3.0";
-        all_properties["text-shadow"] = "CSS3.0";
+	all_properties["text-shadow"] = "CSS3.0";
 	all_properties["unicode-bidi"] = "CSS2.0,CSS2.1,CSS3.0";
 	all_properties["vertical-align"] = "CSS1.0,CSS2.0,CSS2.1,CSS3.0";
 	all_properties["visibility"] = "CSS1.0,CSS2.0,CSS2.1,CSS3.0";
 	all_properties["width"] = "CSS2.0,CSS2.1,CSS3.0";
 	all_properties["widows"] = "CSS2.0,CSS2.1,CSS3.0";
+	all_properties["word-wrap"] = "CSS3.0";
 	all_properties["z-index"] = "CSS1.0,CSS2.0,CSS2.1,CSS3.0";
 	/* Speech */
 	all_properties["volume"] = "CSS2.0,CSS2.1,CSS3.0";
