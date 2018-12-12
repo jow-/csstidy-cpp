@@ -12,7 +12,7 @@
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *   GNU Lesser General Public License for more details.
- * 
+ *
  *   You should have received a copy of the GNU Lesser General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -359,6 +359,17 @@ void prepare()
 	all_properties["richness"] = "CSS2.0,CSS2.1,CSS3.0";
 	all_properties["speak-punctuation"] = "CSS2.0,CSS2.1,CSS3.0";
 	all_properties["speak-numeral"] = "CSS2.0,CSS2.1,CSS3.0";
+	/* Flexbox */
+	all_properties["align-content"] = "CSS3.0";
+	all_properties["align-items"] = "CSS3.0";
+	all_properties["align-self"] = "CSS3.0";
+	all_properties["flex-basis"] = "CSS3.0";
+	all_properties["flex"] = "CSS3.0";
+	all_properties["flex-direction"] = "CSS3.0";
+	all_properties["flex-grow"] = "CSS3.0";
+	all_properties["flex-shrink"] = "CSS3.0";
+	all_properties["flex-wrap"] = "CSS3.0";
+	all_properties["justify-content"] = "CSS3.0";
 
 	background_prop_default["background-image"] = "none";
 	background_prop_default["background-size"] = "auto";
