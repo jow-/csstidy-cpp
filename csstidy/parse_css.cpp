@@ -12,7 +12,7 @@
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *   GNU Lesser General Public License for more details.
- * 
+ *
  *   You should have received a copy of the GNU Lesser General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -83,11 +83,11 @@ void csstidy::parse_css(string css_input)
 				{
 					cur_at += unicode(css_input,i);
 				}
-				else 
+				else
 				{
 					if(!in_char_arr("():/.", css_input[i]))
 					{
-						// Strictly speaking, these are only permitted in @media rules 
+						// Strictly speaking, these are only permitted in @media rules
 						log("Unexpected symbol '" + string(css_input, i, 1) + "' in @-rule", Warning);
 					}
 					cur_at += css_input[i];
@@ -227,14 +227,14 @@ void csstidy::parse_css(string css_input)
 				{
 					cur_property += unicode(css_input,i);
 				}
-				else if(css_input[i] == '*') 
+				else if(css_input[i] == '*')
 				{
 					// IE7 and below recognize properties that begin with '*'
 					if (cur_property == "")
 					{
 						cur_property += css_input[i];
 						log("IE7- hack detected: property name begins with '*'", Warning);
-					} 
+					}
 				}
 				else
 				{
@@ -282,7 +282,7 @@ void csstidy::parse_css(string css_input)
 
 					// url() is a special case that should have been handled above
 					assert(cur_sub_value != "url");
-					
+
 					// cur_sub_value should contain the name of the function, if any
 					cur_sub_value = trim(cur_sub_value + "(");
 					// set current function name and push it onto the stack
@@ -322,7 +322,7 @@ void csstidy::parse_css(string css_input)
 					cur_sub_value_arr.push_back(trim(cur_sub_value));
 					cur_sub_value = "!";
 				}
-				else if (css_input[i] == ',' || css_input[i] == ')') 
+				else if (css_input[i] == ',' || css_input[i] == ')')
 				{
 					// optimise and store the current subvalue, if any
 					cur_sub_value = trim(cur_sub_value);
@@ -346,7 +346,7 @@ void csstidy::parse_css(string css_input)
 							// Pop function from the stack
 							cur_function_arr.pop_back();
 							cur_function = cur_function_arr.empty() ? "" : cur_function_arr.back();
-							
+
 						}
 					}
 					if (!drop) {
@@ -360,7 +360,7 @@ void csstidy::parse_css(string css_input)
 				if( (css_input[i] == '}' || css_input[i] == ';' || pn) && !cur_selector.empty())
 				{
 					// End of value: normalize, optimize and store property
-					
+
 					++properties;
 
 					if(cur_at == "")
@@ -527,7 +527,7 @@ void csstidy::parse_css(string css_input)
 			{
 				status = from;
 				if (cur_function == "" && cur_string.find_first_of(" \n\t\r\0xb") == string::npos && cur_property != "content") {
-					// If the string is not inside a function call, contains no whitespace, 
+					// If the string is not inside a function call, contains no whitespace,
 					// and the current property is not 'content', it may be safe to remove quotes.
 					// TODO: Are there any properties other than 'content' where this is unsafe?
 					// TODO: What if the string contains a comma or slash, and the property is a list or shorthand?
@@ -548,7 +548,7 @@ void csstidy::parse_css(string css_input)
 					cur_selector += cur_string;
 				}
 			}
-			
+
 			break;
 
 			/* Case in-comment */

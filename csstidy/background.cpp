@@ -12,11 +12,11 @@
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *   GNU Lesser General Public License for more details.
- * 
+ *
  *   You should have received a copy of the GNU Lesser General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
- 
+
 #include "csspp_globals.hpp"
 using namespace std;
 extern map<string,string> background_prop_default;
@@ -24,7 +24,7 @@ extern map<string,string> background_prop_default;
 map<string,string> dissolve_short_bg(string istring)
 {
 	vector<string> repeat,attachment,clip,origin,pos,str_values;
-	
+
 	repeat.push_back("repeat"); repeat.push_back("repeat-x"); repeat.push_back("repeat-y");
 	repeat.push_back("no-repeat"); repeat.push_back("space");
 	attachment.push_back("scroll"); attachment.push_back("fixed"); attachment.push_back("local");
@@ -32,7 +32,7 @@ map<string,string> dissolve_short_bg(string istring)
 	origin.push_back("border"); origin.push_back("padding"); origin.push_back("content");
 	pos.push_back("top"); pos.push_back("center"); pos.push_back("bottom"); pos.push_back("left"); pos.push_back("right");
 	string important = "";
-	
+
 	map<string,string> ret;
 	map<string,bool> have;
 	ret["background-image"] = "";
@@ -43,21 +43,21 @@ map<string,string> dissolve_short_bg(string istring)
 	ret["background-clip"] = "";
 	ret["background-origin"] = "";
 	ret["background-color"] = "";
-	
+
 	if(is_important(istring))
 	{
 		important = "!important";
 		istring = gvw_important(istring);
 	}
-	
+
 	str_values = explode_ws(',',istring);
 	for(int i = 0; i < str_values.size(); i++)
 	{
 		have["clip"] = false; have["pos"] = false;
 		have["color"] = false; have["bg"] = false;
-		
+
 		vector<string> temp_values = explode_ws(' ',trim(str_values[i]));
-	
+
 		for(int j = 0; j < temp_values.size(); j++)
 		{
 			if(have["bg"] == false && ((temp_values[j]).substr(0,4) == "url(" || temp_values[j] == "none"))
@@ -106,7 +106,7 @@ map<string,string> dissolve_short_bg(string istring)
 			}
 		}
 	}
-	
+
 	for(map<string,string>::iterator it = background_prop_default.begin(); it != background_prop_default.end(); it++ )
 	{
 		if(ret[it->first] != "")
@@ -120,8 +120,8 @@ map<string,string> dissolve_short_bg(string istring)
 			ret[it->first] += important;
 		}
 	}
-	
-	return ret;	
+
+	return ret;
 }
 
 vector<string> explode_ws(char sep,string istring)
@@ -129,7 +129,7 @@ vector<string> explode_ws(char sep,string istring)
 	// 1 = st // 2 = str
 	int status = 1;
 	char to;
-	
+
 	vector<string> output;
 	output.push_back("");
 	int num = 0;
@@ -155,7 +155,7 @@ vector<string> explode_ws(char sep,string istring)
 				output[num] += istring[i];
 			}
 			break;
-			
+
 			case 2:
 			if(istring[i] == to && !escaped(istring,i))
 			{
@@ -165,7 +165,7 @@ vector<string> explode_ws(char sep,string istring)
 			break;
 		}
 	}
-	
+
 	return output;
 }
 
@@ -176,19 +176,19 @@ void merge_bg(umap<string,string>& css_input)
 	// Array with background images to check if BG image exists
 	vector<string> bg_img_array = explode_ws(',',gvw_important(css_input["background-image"]));
 	string new_bg_value,important = "";
-	
+
 	for(int i = 0; i < number_of_values; i++)
 	{
 		for(map<string,string>::iterator it = background_prop_default.begin(); it != background_prop_default.end(); it++ )
-		{			
+		{
 			// Skip if property does not exist
 			if(!css_input.has(it->first))
 			{
 				continue;
 			}
-			
+
 			string cur_value = css_input[it->first];
-			
+
 			// Skip some properties if there is no background image
 			if((bg_img_array.size() <= i || bg_img_array[i] == "none")
 				&& (it->first == "background-size" || it->first == "background-position"
@@ -196,24 +196,24 @@ void merge_bg(umap<string,string>& css_input)
 			{
 				continue;
 			}
-			
+
 			// Remove !important
 			if(is_important(cur_value))
 			{
 				important = "!important";
 				cur_value = gvw_important(cur_value);
 			}
-			
+
 			// Do not add default values
 			if(cur_value == it->second)
 			{
 				continue;
 			}
-			
+
 			vector<string> temp = explode_ws(',',cur_value);
 
 			if(temp.size() > i)
-			{					
+			{
 				if(it->first == "background-size")
 				{
 					new_bg_value += "(";
@@ -225,19 +225,19 @@ void merge_bg(umap<string,string>& css_input)
 					new_bg_value += temp[i];
 					new_bg_value += " ";
 				}
-			}			
+			}
 		}
-		
+
 		new_bg_value = trim(new_bg_value);
 		if(i != number_of_values-1) new_bg_value += ",";
 	}
-		
+
 	// Delete all background-properties
 	for(map<string,string>::iterator it = background_prop_default.begin(); it != background_prop_default.end(); it++ )
 	{
 		css_input.erase(it->first);
 	}
-	
+
 	// Add new background property
 	if(new_bg_value != "")
 	{

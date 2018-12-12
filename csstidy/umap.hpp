@@ -12,7 +12,7 @@
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *   GNU Lesser General Public License for more details.
- * 
+ *
  *   You should have received a copy of the GNU Lesser General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -28,14 +28,14 @@ using namespace std;
 
 
 template <class keyT, class valT>
-class umap 
-{ 
+class umap
+{
 	typedef map<keyT,valT> StoreT;
 	typedef std::vector<typename StoreT::iterator> FifoT;
 	private:
 		FifoT sortv;
 		StoreT content;
-	
+
 	public:
 		// Functions, same as map<> (simplified)
 		void erase(const keyT& key)
@@ -50,17 +50,17 @@ class umap
 				}
 			}
 		}
-		
+
 		int size()
 		{
 			return content.size();
 		}
-		
+
 		bool empty()
 		{
 			return content.empty();
 		}
-		
+
 		void sort()
 		{
 			sortv.clear();
@@ -69,7 +69,7 @@ class umap
 				sortv.push_back(i);
 			}
 		}
-		
+
 		// Checks if the map has the key
 		bool has(const keyT key)
 		{
@@ -85,14 +85,14 @@ class umap
 				sortv.push_back(i);
 			}
 		}
-				
+
 		bool operator==(umap<keyT,valT>& comp) const
 		{
 			if(sortv.size() != comp.sortv.size())
 			{
 				return false;
 			}
-					
+
 			for(int i = 0; i < sortv.size(); ++i)
 			{
 				if(sortv[i]->first != comp.sortv[i]->first)
@@ -100,11 +100,11 @@ class umap
 					return false;
 				}
 			}
-			
+
 			return (content == comp.content);
 		}
 
-		// Access the map per [] or at()  
+		// Access the map per [] or at()
 		valT& operator[](keyT const& key )
 		{
 			typename StoreT::iterator mIt = content.find(key);
@@ -122,27 +122,27 @@ class umap
 			{
 				return sortv[index]->second;
 			}
-		} 
-		
+		}
+
 		// Iterator
-		
+
 		class iterator
 		{
 			friend typename umap<keyT,valT>::iterator umap<keyT,valT>::begin();
 			friend typename umap<keyT,valT>::iterator umap<keyT,valT>::end();
 			friend void umap<keyT,valT>::erase(const typename umap<keyT,valT>::iterator& it);
-			
+
 			private:
 				typename FifoT::iterator pos;
 				int num;
 				int size;
-				
+
 			public:
-				iterator() 
+				iterator()
 				{
 					num = 0;
 				}
-				
+
 				typename umap<keyT,valT>::iterator& operator= (const typename umap<keyT,valT>::iterator& iter)
 				{
 					pos = iter.pos;
@@ -150,29 +150,29 @@ class umap
 					size = 0;
 					return *this;
 				}
-				
+
 				bool islast()
 				{
 					return (num == size-1);
 				}
-				
+
 				void operator++()
 				{
 					++pos;
 					++num;
 				}
-				
+
 				void operator++(int)
 				{
 					++pos;
 					++num;
 				}
-				
+
 				bool operator!= (typename umap<keyT,valT>::iterator iter)
 				{
-					return (iter.pos != pos); 
+					return (iter.pos != pos);
 				}
-				
+
 				typename StoreT::iterator& operator->()
 				{
 					return *pos;
@@ -184,7 +184,7 @@ class umap
 			content.erase(*it.pos);
 			sortv.erase(it.pos);
 		}
-		
+
 		typename umap<keyT,valT>::iterator begin()
 		{
 			typename umap<keyT,valT>::iterator test;

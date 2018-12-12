@@ -12,11 +12,11 @@
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *   GNU Lesser General Public License for more details.
- * 
+ *
  *   You should have received a copy of the GNU Lesser General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
- 
+
 #include "csspp_globals.hpp"
 using namespace std;
 
@@ -26,13 +26,13 @@ extern map<string,string> replace_colors,all_properties;
 string shorthand(string value)
 {
 	string important = "";
-	
+
 	if(is_important(value))
 	{
 		value = gvw_important(value);
 		important = "!important";
 	}
-	
+
 	vector<string> values = explode(" ",value);
 	switch(values.size())
 	{
@@ -51,7 +51,7 @@ string shorthand(string value)
 		}
 		else return value + important;
 		break;
-		
+
 		case 3:
 		if(values[0] == values[1] && values[0] == values[2])
 		{
@@ -63,7 +63,7 @@ string shorthand(string value)
 		}
 		else return value + important;
 		break;
-		
+
 		case 2:
 		if(values[0] == values[1])
 		{
@@ -71,7 +71,7 @@ string shorthand(string value)
 		}
 		else return value + important;
 		break;
-		
+
 		default:
 		return value + important;
 	}
@@ -81,7 +81,7 @@ string compress_numbers(string subvalue, string property, string function)
 {
 	string units[] = {"in", "cm", "mm", "pt", "pc", "px", "rem", "%", "ex", "gd", "em", "vw", "vh",
 	                  "vm", "ch", "deg", "grad", "rad", "turn", "ms", "s", "khz", "hz" }; // sync  for loop
-	           
+
 	vector<string> temp;
 	if(property == "font")
 	{
@@ -91,7 +91,7 @@ string compress_numbers(string subvalue, string property, string function)
 	{
 		temp.push_back(subvalue);
 	}
-		
+
 	for (int i = 0; i < temp.size(); ++i)
 	{
 		if(!(temp[i].length() > 0 && (ctype_digit(temp[i][0])) ||
@@ -101,13 +101,13 @@ string compress_numbers(string subvalue, string property, string function)
 			// (optionally preceded by a plus or minus sign), make no changes to it.
 			continue;
 		}
-		
+
 		if(function == "" && in_str_array(color_values,property))
 		{
 			temp[i] = "#" + temp[i];
 			//csstidy::log("Inserting missing '#'", Warning); // FIXME: Make log() a static method
 		}
-	
+
 		if(str2f(temp[i]) == 0)
 		{
 			temp[i] = "0";
@@ -142,10 +142,10 @@ string compress_numbers(string subvalue, string property, string function)
                 } else {
                     temp[i] = temp[i].substr(1);
                 }
-            }     
+            }
 		}
-	}	
-		
+	}
+
 	return (temp.size() > 1) ? temp[0] + "/" + temp[1] : ((temp.size() > 0) ? temp[0] : "");
 }
 
@@ -176,7 +176,7 @@ string cut_color(string color)
 			}
 			if(atoi(color_tmp[i].c_str()) > 255) color_tmp[i] = 255;
 		}
-		
+
 		color = "#";
 		for (int i = 0; i < color_tmp.size(); ++i)
 		{
@@ -215,7 +215,7 @@ string cut_color(string color)
 	if(temp == "black")		return "#000";
 	if(temp == "fuchsia")	return "#f0f";
 	if(temp == "white")		return "#fff";
-	if(temp == "yellow")	return "#ff0";		
+	if(temp == "yellow")	return "#ff0";
 	/* hex code -> color name */
 	if(temp == "#800000")	return "maroon";
 	if(temp == "#ffa500")	return "orange";
@@ -226,7 +226,7 @@ string cut_color(string color)
 	if(temp == "#008080")	return "teal";
 	if(temp == "#c0c0c0")	return "silver";
 	if(temp == "#808080")	return "gray";
-	if(temp == "#f00")		return "red";	
+	if(temp == "#f00")		return "red";
 
 	return color;
 }
@@ -258,7 +258,7 @@ void merge_selectors(sstore& input)
 	for(sstore::iterator i = input.begin(), e = input.end(); i != e;)
 	{
 		string newsel = "";
-	
+
 		// Check if properties also exist in another selector
 		vector<string> keys;
 		for(sstore::iterator j = input.begin(); j != input.end(); j++ )
@@ -267,7 +267,7 @@ void merge_selectors(sstore& input)
 			{
 				continue;
 			}
-			
+
 			if(input[j->first] == input[i->first])
 			{
 				keys.push_back(j->first);
@@ -285,7 +285,7 @@ void merge_selectors(sstore& input)
 			}
 
 			input[newsel] = i->second;
-			
+
 			input.erase(i);
 			e = input.end();
 		} else {

@@ -12,16 +12,16 @@
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *   GNU Lesser General Public License for more details.
- * 
+ *
  *   You should have received a copy of the GNU Lesser General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
- 
+
 #include "csspp_globals.hpp"
 extern map< string, vector<string> > shorthands;
 
 csstidy::csstidy()
-{ 
+{
 	properties = 0;
 	selectors = 0;
 	charset = "";
@@ -29,7 +29,7 @@ csstidy::csstidy()
 	line = 1;
 	tokens = "{};:()@='\"/,\\!$%&*+.<>?[]^`|~";
 	css_level = "CSS3.0";
-	
+
 	settings["remove_bslash"] = 1;
 	settings["compress_colors"] = 1;
 	settings["compress_font-weight"] = 1;
@@ -46,7 +46,7 @@ csstidy::csstidy()
 	settings["silent"] = 0;
 	settings["preserve_css"] = 0;
 	settings["timestamp"] = 0;
-	
+
 	csstemplate.push_back("<span class=\"at\">"); //string before @rule
 	csstemplate.push_back("</span> <span class=\"format\">{</span>\n"); //bracket after @-rule
 	csstemplate.push_back("<span class=\"selector\">"); //string before selector
@@ -61,8 +61,8 @@ csstidy::csstidy()
 	csstemplate.push_back("<span class=\"comment\">"); // before comment
 	csstemplate.push_back("</span>\n"); //after comment
 	csstemplate.push_back("\n"); // after last line @-rule
-} 
-	
+}
+
 void csstidy::add_token(const token_type ttype, const string data, const bool force)
 {
 	if(settings["preserve_css"] || force) {
@@ -76,7 +76,7 @@ void csstidy::add_token(const token_type ttype, const string data, const bool fo
 void csstidy::copy(const string media, const string selector, const string media_new, const string selector_new)
 {
 	for(int k = 0; k < css[media][selector].size(); k++)
-	{	
+	{
 		string property = css[media][selector].at(k);
 		string value = css[media][selector][property];
 		add(media_new,selector_new,property,value);
@@ -88,7 +88,7 @@ void csstidy::add(const string& media, const string& selector, const string& pro
 	if(settings["preserve_css"]) {
 		return;
 	}
-	
+
 	if(css[media][selector].has(property))
 	{
 		if( !is_important(css[media][selector][property]) || (is_important(css[media][selector][property]) && is_important(value)) )
@@ -130,7 +130,7 @@ string csstidy::unicode(string& istring,int& i)
 	++i;
 	string add = "";
 	bool replaced = false;
-	
+
 	while(i < istring.length() && (ctype_xdigit(istring[i]) || ctype_space(istring[i])) && add.length()< 6)
 	{
 		add += istring[i];
@@ -159,7 +159,7 @@ string csstidy::unicode(string& istring,int& i)
 	{
 		i--;
 	}
-	
+
 	if(add != "\\" || !settings["remove_bslash"] || in_str_array(tokens,istring[i+1]))
 	{
 		return add;
@@ -200,22 +200,22 @@ void csstidy::merge_4value_shorthands(string media, string selector)
 				}
 				css[media][selector].erase(i->second[j]);
 			}
-			add(media, selector, i->first, shorthand(trim(temp + important)));		
+			add(media, selector, i->first, shorthand(trim(temp + important)));
 		}
 	}
-} 
+}
 
 map<string,string> csstidy::dissolve_4value_shorthands(string property, string value)
 {
 	map<string, string> ret;
 	extern map< string, vector<string> > shorthands;
-	
+
 	if(shorthands[property][0] == "0")
 	{
 		ret[property] = value;
 		return ret;
 	}
-	
+
 	string important = "";
 	if(is_important(value))
 	{
@@ -250,9 +250,9 @@ map<string,string> csstidy::dissolve_4value_shorthands(string property, string v
 		for(int i = 0; i < 4; ++i)
 		{
 			ret[shorthands[property][i]] = values[0] + important;
-		}	
+		}
 	}
-	
+
 	return ret;
 }
 
@@ -264,17 +264,17 @@ void csstidy::explode_selectors()
         vector<string> new_sels;
         int lastpos = 0;
         sel_separate.push_back(cur_selector.length());
-        
+
         for (int i = 0; i < sel_separate.size(); ++i)
         {
             if (i == sel_separate.size()-1) {
                 sel_separate[i] += 1;
             }
-            
+
             new_sels.push_back(cur_selector.substr(lastpos,sel_separate[i]-lastpos-1));
             lastpos = sel_separate[i];
         }
- 
+
         if (new_sels.size() > 1)
         {
             for (int i = 0; i < new_sels.size(); ++i)

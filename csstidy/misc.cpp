@@ -12,14 +12,14 @@
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *   GNU Lesser General Public License for more details.
- * 
+ *
  *   You should have received a copy of the GNU Lesser General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include <cstring> 
+#include <cstring>
 #include "csspp_globals.hpp"
 
-bool escaped(const string &istring, const int pos) 
+bool escaped(const string &istring, const int pos)
 {
 	return !(s_at(istring,pos-1) != '\\' || escaped(istring,pos-1));
 }
@@ -42,7 +42,7 @@ vector<string> explode(const string e,string s, const bool check)
 	vector<string> ret;
 	int iPos = s.find(e, 0);
 	int iPit = e.length();
-	
+
 	while(iPos > -1)
 	{
 		if(iPos != 0 || check)
@@ -52,7 +52,7 @@ vector<string> explode(const string e,string s, const bool check)
 		s.erase(0,iPos+iPit);
 		iPos = s.find(e, 0);
 	}
-	
+
  	if(s != "" || check)
  	{
 		ret.push_back(s);
@@ -95,15 +95,15 @@ string build_value(const vector<string> subvalues)
 float round(const float &number, const int num_digits)
 {
     float doComplete5i, doComplete5(number * powf(10.0f, (float) (num_digits + 1)));
-    
+
     if(number < 0.0f)
         doComplete5 -= 5.0f;
     else
         doComplete5 += 5.0f;
-    
+
     doComplete5 /= 10.0f;
     modff(doComplete5, &doComplete5i);
-    
+
     return doComplete5i / powf(10.0f, (float) num_digits);
 }
 
@@ -115,7 +115,7 @@ string str_replace(const string find, const string replace, string str)
     int pos = str.find(find);
 
     while(pos != string::npos)
-	{  
+	{
         str.replace(pos, len, replace);
         pos = str.find(find, pos + replace_len);
     }
@@ -125,14 +125,14 @@ string str_replace(const string find, const string replace, string str)
 string str_replace(const vector<string>& find, const string replace, string str)
 {
 	int replace_len = replace.length();
-	
+
 	for(int i = 0; i < find.size(); ++i)
 	{
 	    int len = find[i].length();
 	    int pos = str.find(find[i]);
-	
+
 	    while(pos != string::npos)
-		{  
+		{
 	        str.replace(pos, len, replace);
 	        pos = str.find(find[i], pos + replace_len);
 	    }
@@ -207,7 +207,7 @@ vector<string> unserialise_sa(const string istring)
 	int strlen = istring.length();
 	int strpos = 0;
 	vector<string> ret;
-	
+
 	while(strlen > 0)
 	{
 		string digit_tmp = "";
@@ -218,7 +218,7 @@ vector<string> unserialise_sa(const string istring)
 		}
 		// :
 		--strlen; ++strpos;
-		
+
 		int next_length = static_cast<int>(str2f(digit_tmp));
 		next_length += strpos;
 
@@ -247,7 +247,7 @@ bool ctype_xdigit(char c)
 bool ctype_alpha(char c)
 {
 	c = chartolower(c);
-	return (c == 'a' || c == 'b' || c == 'c' || c == 'd' || c == 'e' || c == 'f' || c == 'g' || c == 'h' || c == 'i' || c == 'j' || 
-	   c == 'k' || c == 'l' || c == 'm' || c == 'n' || c == 'o' || c == 'p' || c == 'q' || c == 'r' || c == 's' || c == 't' || 
+	return (c == 'a' || c == 'b' || c == 'c' || c == 'd' || c == 'e' || c == 'f' || c == 'g' || c == 'h' || c == 'i' || c == 'j' ||
+	   c == 'k' || c == 'l' || c == 'm' || c == 'n' || c == 'o' || c == 'p' || c == 'q' || c == 'r' || c == 's' || c == 't' ||
 	   c == 'u' || c == 'v' || c == 'w' || c == 'x' || c == 'y' || c == 'z');
 }

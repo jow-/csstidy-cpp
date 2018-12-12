@@ -12,7 +12,7 @@
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *   GNU Lesser General Public License for more details.
- * 
+ *
  *   You should have received a copy of the GNU Lesser General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
 	predefined_templates["high"].push_back("<span class=\"comment\">"); // before comment
 	predefined_templates["high"].push_back("</span>"); //after comment
 	predefined_templates["high"].push_back("\n"); // after last line @-rule
-	
+
 	predefined_templates["highest"].push_back("<span class=\"at\">");
 	predefined_templates["highest"].push_back("</span><span class=\"format\">{</span>");
 	predefined_templates["highest"].push_back("<span class=\"selector\">");
@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
 	predefined_templates["highest"].push_back("<span class=\"comment\">"); // before comment
 	predefined_templates["highest"].push_back("</span>"); //after comment
 	predefined_templates["highest"].push_back(""); // after last line @-rule
-		
+
 	predefined_templates["low"].push_back("<span class=\"at\">");
 	predefined_templates["low"].push_back("</span> <span class=\"format\">{</span>\n");
 	predefined_templates["low"].push_back("<span class=\"selector\">");
@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
 	predefined_templates["low"].push_back("<span class=\"comment\">"); // before comment
 	predefined_templates["low"].push_back("</span>\n"); //after comment
 	predefined_templates["low"].push_back("\n"); // after last line @-rule
-	
+
 	csstidy csst;
 
 	if(argc > 1)
@@ -84,9 +84,9 @@ int main(int argc, char *argv[])
 			cout << "The file \"" << filein << "\" does not exist." << endl;
 			return EXIT_FAILURE;
 		}
-		
+
 		string output_filename;
-		
+
 		for(int i = 2; i < argc; ++i)
 		{
 			bool output_file = true;
@@ -136,7 +136,7 @@ int main(int argc, char *argv[])
 				output_filename = trim(argv[i]);
 			}
 		}
-		
+
 		string css_file;
         if(filein == "-") {
 			string temp;
@@ -149,7 +149,7 @@ int main(int argc, char *argv[])
         }
 
 		csst.parse_css(css_file);
-		
+
 		// Print CSS to screen if no output file is specified
 		if(output_filename == "")
 		{
@@ -159,7 +159,7 @@ int main(int argc, char *argv[])
 		{
 			csst.print_css(output_filename);
 		}
-		
+
 		return EXIT_SUCCESS;
 	}
 
@@ -170,7 +170,7 @@ int main(int argc, char *argv[])
 		   || j->first == "case_properties") {
 			continue;
 		}
-		
+
 		cout << " --" << j->first;
 		if(j->second == true)
 		{
@@ -186,6 +186,6 @@ int main(int argc, char *argv[])
 	cout << " --optimise_shorthands=[1|2|0] |\n";
 	cout << " --template=[default|filename|low|high|highest] |\n";
 	cout << " output_filename ]*" << endl;
-	
+
 	return EXIT_SUCCESS;
 }

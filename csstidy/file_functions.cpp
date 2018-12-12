@@ -12,7 +12,7 @@
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *   GNU Lesser General Public License for more details.
- * 
+ *
  *   You should have received a copy of the GNU Lesser General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -24,7 +24,7 @@ string file_get_contents(const string filename)
 {
 	ifstream file_input(filename.c_str(),ios::binary);
     string line, file_contents = "";
-    
+
     if(file_input.bad())
     {
 		return "";
@@ -35,7 +35,7 @@ string file_get_contents(const string filename)
 		{
 			getline(file_input,line);
 			file_contents += (line + "\n");
-		}	    
+		}
 	}
 	file_input.close();
 
@@ -51,7 +51,7 @@ bool file_exists(const char *filename)
 		file_input.close();
 		return true;
 	}
-	
+
 	file_input.close();
 	return false;
 }

@@ -12,13 +12,13 @@
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *   GNU Lesser General Public License for more details.
- * 
+ *
  *   You should have received a copy of the GNU Lesser General Public License
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
- 
+
 #ifndef HEADER_CSS_IMPORTANT
-#define HEADER_CSS_IMPORTANT 
+#define HEADER_CSS_IMPORTANT
 
 // Checks if value is important
 bool is_important(string value);
@@ -29,4 +29,4 @@ string gvw_important(string value);
 // Compresses !important (for example if someone uses "! important")
 string c_important(string value);
 
-#endif //HEADER_CSS_IMPORTANT 
+#endif //HEADER_CSS_IMPORTANT
