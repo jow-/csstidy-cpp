@@ -182,11 +182,21 @@ void csstidy::merge_4value_shorthands(string media, string selector)
 	{
 		string temp;
 
-		if(css[media][selector].has(i->second[0]) && css[media][selector].has(i->second[1])
-		&& css[media][selector].has(i->second[2]) && css[media][selector].has(i->second[3]))
+		bool complete = true;
+
+		for (int j = 0; j < i->second.size(); j++)
+		{
+			if (!css[media][selector].has(i->second[j]))
+			{
+				complete = false;
+				break;
+			}
+		}
+
+		if (complete)
 		{
 			string important = "";
-			for(int j = 0; j < 4; ++j)
+			for(int j = 0; j < i->second.size(); ++j)
 			{
 				string val = css[media][selector][i->second[j]];
 				if(is_important(val))
@@ -224,14 +234,14 @@ map<string,string> csstidy::dissolve_4value_shorthands(string property, string v
 	}
 	vector<string> values = explode(" ",value);
 
-	if(values.size() == 4)
+	if(values.size() == 4 && shorthands[property].size() == 4)
 	{
 		for(int i=0; i < 4; ++i)
 		{
 			ret[shorthands[property][i]] = values[i] + important;
 		}
 	}
-	else if(values.size() == 3)
+	else if(values.size() == 3 && shorthands[property].size() == 4)
 	{
 		ret[shorthands[property][0]] = values[0] + important;
 		ret[shorthands[property][1]] = values[1] + important;
@@ -240,14 +250,14 @@ map<string,string> csstidy::dissolve_4value_shorthands(string property, string v
 	}
 	else if(values.size() == 2)
 	{
-		for(int i = 0; i < 4; ++i)
+		for(int i = 0; i < shorthands[property].size(); ++i)
 		{
 			ret[shorthands[property][i]] = ((i % 2 != 0)) ? values[1] + important : values[0] + important;
 		}
 	}
 	else
 	{
-		for(int i = 0; i < 4; ++i)
+		for(int i = 0; i < shorthands[property].size(); ++i)
 		{
 			ret[shorthands[property][i]] = values[0] + important;
 		}
