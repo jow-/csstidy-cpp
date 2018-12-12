@@ -526,7 +526,7 @@ void csstidy::parse_css(string css_input)
 			if(css_input[i] == str_char && !escaped(css_input,i) && str_in_str == false)
 			{
 				status = from;
-				if (cur_function == "" && cur_string.find_first_of(" \n\t\r\0xb") == string::npos && cur_property != "content") {
+				if (cur_function == "" && cur_string.find_first_of(" \n\t\r\0xb") == string::npos && cur_property != "content" && from != is) {
 					// If the string is not inside a function call, contains no whitespace,
 					// and the current property is not 'content', it may be safe to remove quotes.
 					// TODO: Are there any properties other than 'content' where this is unsafe?
