@@ -370,6 +370,21 @@ void prepare()
 	all_properties["flex-shrink"] = "CSS3.0";
 	all_properties["flex-wrap"] = "CSS3.0";
 	all_properties["justify-content"] = "CSS3.0";
+	/* Animation */
+	all_properties["animation"] = "CSS3.0";
+	all_properties["animation-name"] = "CSS3.0";
+	all_properties["animation-duration"] = "CSS3.0";
+	all_properties["animation-timing-function"] = "CSS3.0";
+	all_properties["animation-delay"] = "CSS3.0";
+	all_properties["animation-iteration-count"] = "CSS3.0";
+	all_properties["animation-direction"] = "CSS3.0";
+	all_properties["animation-fill-mode"] = "CSS3.0";
+	all_properties["animation-play-state"] = "CSS3.0";
+	all_properties["transition"] = "CSS3.0";
+	all_properties["transition-property"] = "CSS3.0";
+	all_properties["transition-duration"] = "CSS3.0";
+	all_properties["transition-timing-function"] = "CSS3.0";
+	all_properties["transition-delay"] = "CSS3.0";
 
 	background_prop_default["background-image"] = "none";
 	background_prop_default["background-size"] = "auto";
