@@ -260,6 +260,7 @@ void prepare()
 	all_properties["border-spacing"] = "CSS3.0";
 	all_properties["border-radius"] = "CSS3.0";
 	all_properties["box-shadow"] = "CSS3.0";
+	all_properties["box-sizing"] = "CSS3.0";
 	all_properties["bottom"] = "CSS2.0,CSS2.1,CSS3.0";
 	all_properties["caption-side"] = "CSS2.0,CSS2.1,CSS3.0";
 	all_properties["content"] = "CSS2.0,CSS2.1,CSS3.0";
