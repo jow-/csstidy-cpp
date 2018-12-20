@@ -221,8 +221,6 @@ void prepare()
 	shorthands["margin"].push_back("margin-right");
 	shorthands["margin"].push_back("margin-bottom");
 	shorthands["margin"].push_back("margin-left");
-	shorthands["overflow"].push_back("overflow-x");
-	shorthands["overflow"].push_back("overflow-y");
 	shorthands["padding"].push_back("padding-top");
 	shorthands["padding"].push_back("padding-right");
 	shorthands["padding"].push_back("padding-bottom");
