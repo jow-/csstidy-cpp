@@ -520,9 +520,10 @@ void csstidy::parse_css(string css_input)
 				temp_add = "\\A ";
 				log("Fixed incorrect newline in string",Warning);
 			}
-			if (!(str_char == ')' && char2str(css_input[i]).find_first_of(" \n\t\r\0xb") != string::npos && !str_in_str)) {
+			if (cur_sub_value == "url" || !(str_char == ')' && char2str(css_input[i]).find_first_of(" \n\t\r\0xb") != string::npos && !str_in_str)) {
 				cur_string += temp_add;
 			}
+
 			if(css_input[i] == str_char && !escaped(css_input,i) && str_in_str == false)
 			{
 				status = from;
